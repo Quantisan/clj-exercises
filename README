@@ -1,6 +1,6 @@
 # clj-exercises
 
-FIXME: write description
+collection of exercises done in clojure
 
 ## Usage
 
@@ -8,6 +8,6 @@ FIXME: write
 
 ## License
 
-Copyright (C) 2011 FIXME
+Copyright (C) 2011 Paul Lam
 
 Distributed under the Eclipse Public License, the same as Clojure.
