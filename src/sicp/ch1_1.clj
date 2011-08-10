@@ -1,4 +1,4 @@
-(ns sicp.ch1)
+(ns sicp.ch1-1)
 
 ;; ex. 1.2
 (/ (+ 5
@@ -67,7 +67,7 @@ returns the sum of the squares of the two larger numbers."
 		guess
 		(recur (improve-sq guess x) x)))
 
-(defn- cbrt-iter
+(defn- cbrt-iters
   [guess x]
 	(if ((good-enough? cube) guess x)
 		guess
