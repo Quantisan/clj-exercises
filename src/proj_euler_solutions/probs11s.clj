@@ -10,10 +10,11 @@
 (defn int-to-digits-mapper
   "Converts an integer to a list of its digits."
   [x]
-  (letfn [(char-to-int
-            [c]
-            (Integer. (str c)))]                       
-  (map char-to-int (apply list (str x)))))
+  (letfn 
+    [(char-to-int 
+       [c]
+       (- (int c) 48))]
+    (map char-to-int (apply list (str x)))))
 
 (defn p16
   ([]
