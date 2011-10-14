@@ -14,7 +14,7 @@
     [(char-to-int 
        [c]
        (- (int c) 48))]
-    (map char-to-int (apply list (str x)))))
+    (map char-to-int (str x))))
 
 (defn p16
   ([]
@@ -23,3 +23,12 @@
     (let [num (expt 2 pow)]
       (reduce + (int-to-digits-mapper num)))))
       
+(defn factorial [x]
+  (let [nums (range 2N (inc x))]  ;; note use of big int
+    (reduce * nums)))
+
+(defn p20
+  ([]
+    (p20 100))
+  ([x]
+    (reduce + (int-to-digits-mapper (factorial x)))))
