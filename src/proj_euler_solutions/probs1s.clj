@@ -1,7 +1,7 @@
 (ns euler.probs1s
-  (:require [clojure.contrib.math :as math])
-  (:require [clojure.string :as str]))
-  ;(:use [clojure.contrib.lazy-seqs :only [primes]]))
+  (:require [clojure.math.numeric-tower :as math])
+  (:require [clojure.string :as str])
+  (:use [clojure.set :only (difference)]))
 
 (declare primes)  
   
@@ -88,8 +88,8 @@
 
 (defn p6 [n]
   (let [nums						(range 1 (inc n))
-        sum-of-squares	(->> nums (map #(* % %)) (apply +))
-        square-of-sum		(#(* % %) (apply + nums))]
+        sum-of-squares	(->> nums (map #(* % %)) (reduce +))
+        square-of-sum		(#(* % %) (reduce + nums))]
     (- square-of-sum sum-of-squares)))
 
 (defn p5-3 [n]
@@ -100,7 +100,7 @@
 (defn p5-2 [n]
   (let [pri-set		(into #{} (take-while #(> n %) primes))
         rng-set		(into #{} (range 2 (inc n)))
-        com				(into [] (clojure.set/difference rng-set pri-set))
+        com				(into [] (difference rng-set pri-set))
         pri-map		(zipmap pri-set (repeatedly 1))]
     (loop [pm		pri-map
            com	com]
