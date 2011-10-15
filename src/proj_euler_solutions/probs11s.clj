@@ -271,13 +271,20 @@
   []
   (apply str (take 10 (str (reduce + p13-input)))))
 
+(defn collatz-step
+  [x]
+   (if (odd? x)
+     (inc (* 3 x))
+     (/ x 2)))
+
 (defn collatz
   [x]
-  (if (= x 1)
-    '(1)
-    (cons x (collatz (if (odd? x)
-                       (inc (* 3 x))
-                       (/ x 2))))))
+  (loop [k    x
+         coll [x]]
+    (if (= k 1)
+      coll
+      (let [y  (collatz-step k)]
+        (recur y (cons y coll))))))   
 
 (defn p14
   ([]
