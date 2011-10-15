@@ -271,3 +271,24 @@
   []
   (apply str (take 10 (str (reduce + p13-input)))))
 
+(defn collatz
+  [x]
+  (if (= x 1)
+    '(1)
+    (cons x (collatz (if (odd? x)
+                       (inc (* 3 x))
+                       (/ x 2))))))
+
+(defn p14
+  ([]
+    (p14 (dec (int 1e6))))
+  ([x]
+    (loop [k   x
+           max 0
+           i   0]
+      (let [cur (count (collatz k))]
+        (cond
+          (= k 1)  i
+          (> cur max)  (recur (dec k) cur k)
+          :else (recur (dec k) max i))))))
+  
