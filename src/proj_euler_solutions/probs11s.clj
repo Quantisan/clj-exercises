@@ -298,4 +298,29 @@
           (= k 1)  i
           (> cur max)  (recur (dec k) cur k)
           :else (recur (dec k) max i))))))
+
+(defn triangle
+  [x]
+  (apply + (range 1 (inc x))))
   
+(defn count-factors
+  [x]
+  (loop [factors  0
+         cur      x]
+    (if (> cur 0)
+      (recur (if (= 0 (mod x cur))
+               (inc factors)
+               factors)
+             (dec cur))
+      factors)))
+
+(defn p12
+  ([]
+    (p12 500))
+  ([n]
+    (loop [i  n]
+      (if (> (count-factors i)
+             n)
+        i
+        (recur (inc i))))))
+        
