@@ -44,4 +44,16 @@
       (fresh (x)
              (== true x)
              (== true q)))
+
+(run* (x)
+      s#)
+
+(run* (x)
+      (let [x false]
+        (fresh (x)
+               (== true x))))
+
+(run* (r)
+      (fresh (x y)
+             (== (cons x (cons y '())) r)))
         
