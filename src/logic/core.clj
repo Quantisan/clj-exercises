@@ -56,4 +56,18 @@
 (run* (r)
       (fresh (x y)
              (== (cons x (cons y '())) r)))
+
+(run* (r)
+      (fresh (x)
+             (let [y x]
+               (fresh (x)
+                      (== (cons y (cons x (cons y '()))) r)))))
+(run* (r)
+      (fresh (x)
+             (let [y x]
+      ;         (fresh (x)
+                      (== (cons y (cons x (cons y '()))) r))))
         
+(run* (q)
+      (== false q)
+      (== true q))
