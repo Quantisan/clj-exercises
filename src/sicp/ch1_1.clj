@@ -20,6 +20,12 @@ returns the sum of the squares of the two larger numbers."
     (and (< b a) (< b c)) (+ (* a a) (* c c))		; b is smallest
     (and (< c a) (< c b)) (+ (* a a) (* b b))))	; c is smallest
 
+;; ex 1.5
+(def p p)
+(defn test [x y]
+  (if (= x 0) 0 y))
+(test 0 p)
+
 ;; ex 1.6
 (defn new-if
   [predicate then-clause else-clause]
