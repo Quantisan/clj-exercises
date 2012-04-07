@@ -39,6 +39,8 @@
 		:else (A (dec x)
              (A x (dec y)))))
 
+(defn g [n] (A 1 n))
+(defn f [n] (A 2 n))
 
 ;;;;
 ;; pg 82
