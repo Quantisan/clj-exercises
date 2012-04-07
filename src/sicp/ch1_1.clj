@@ -27,16 +27,6 @@ returns the sum of the squares of the two larger numbers."
 (test 0 p)
 
 ;; ex 1.6
-(defn new-if
-  [predicate then-clause else-clause]
-	(cond 
-   predicate then-clause
-	 :else else-clause))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;
-;; ex 1.7, 1.8
-;;;;;;;;;;;;;;;;;;;;;;;;
 (defn abs
   [x]
   (if (< x 0)	
@@ -49,6 +39,25 @@ returns the sum of the squares of the two larger numbers."
 
 (defn square [x] (* x x))
 
+(defn new-if
+  [predicate then-clause else-clause]
+	(cond 
+   predicate then-clause
+	 :else else-clause))
+(defn ok? [guess x]
+  (< (abs (- (square guess) x)) 0.001))
+(defn improve
+  [guess x]
+	(average guess (/ x guess)))
+(defn sqrt-new-if [guess x]
+  (new-if (ok? guess x)
+          guess
+          (sqrt-new-if (improve guess x)
+                     x)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; ex 1.7, 1.8
+;;;;;;;;;;;;;;;;;;;;;;;;
 (defn cube [x] (* x x x))
 
 (defn- improve-sq
@@ -73,7 +82,7 @@ returns the sum of the squares of the two larger numbers."
 		guess
 		(recur (improve-sq guess x) x)))
 
-(defn- cbrt-iters
+(defn- cbrt-iter
   [guess x]
 	(if ((good-enough? cube) guess x)
 		guess
