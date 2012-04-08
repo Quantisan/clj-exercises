@@ -137,3 +137,11 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
          (if (< n 3)
            n
            (iter 2 1 0 3))))
+
+; ex 1.12
+(defn pascal [depth pos]
+  (if (or (= depth 1) (= pos 1) (= pos depth))
+    1
+    (+ (pascal (dec depth) (dec pos)) 
+       (pascal (dec depth) pos))))
+  
