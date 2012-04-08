@@ -102,11 +102,6 @@ a procedure that computes f by means of an iterative process."
        (* 2 (f-rec (- n 2)))
        (* 3 (f-rec (- n 3))))))
 
-(define (fib-iter a b count)
-  (if (= count 0)
-    b
-    (fib-iter (+ a b) a (- count 1))))
-
 (defn f-iter2
 "
  f (n) = n if n < 3;
@@ -144,4 +139,21 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
     1
     (+ (pascal (dec depth) (dec pos)) 
        (pascal (dec depth) pos))))
+
+; ex 1.16
+(defn square [x] (* x x))
+
+(defn fast-expt [b n]
+  (cond 
+    (= n 0) 1
+    (even? n) (square (fast-expt b (/ n 2)))
+    :else (* b (fast-expt b (- n 1)))))
   
+(defn fast-expt-iter [b n]
+  (loop [a   (if (even? n) 1 b)
+         x   b
+         cnt n]
+    (if (< cnt 2)
+      (* a x)
+      (recur a (square x) (/ cnt 2)))))
+    
