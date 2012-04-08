@@ -96,11 +96,29 @@ n < 3 and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3. Write a
 procedure that computes f by means of a recursive process. Write
 a procedure that computes f by means of an iterative process."
   [n]
-  (cond
-    (< n 3)  n
-    :else    (+ (f-rec (dec n))
-                (* 2 (f-rec (- n 2)))
-                (* 3 (f-rec (- n 3))))))
+  (if (< n 3)
+    n
+    (+ (f-rec (dec n))
+       (* 2 (f-rec (- n 2)))
+       (* 3 (f-rec (- n 3))))))
+
+(define (fib-iter a b count)
+  (if (= count 0)
+    b
+    (fib-iter (+ a b) a (- count 1))))
+
+(defn f-iter2
+"
+ f (n) = n if n < 3;
+ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3
+"
+  [n]
+  (if (< n 3)
+    n
+    (loop [a 2, b 1, c 0, x n]
+      (if (< x 3)
+        a
+        (recur (+ a (* 2 b) (* 3 c)) a b (dec x))))))
 
 (defn f-iter
 "f (n) = n if n < 3;
@@ -108,7 +126,7 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
   [n]
   (letfn [(iter 
             [a b c count]
-            (if (= count n)
+            (if (> count n)
               a
               (recur (+ a 
                         (* 2 b)
@@ -118,4 +136,4 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
                      (inc count))))]
          (if (< n 3)
            n
-           (iter 3 2 1 3))))
+           (iter 2 1 0 3))))
