@@ -156,4 +156,20 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
     (if (< cnt 2)
       (* a x)
       (recur a (square x) (/ cnt 2)))))
+
+; ex 1.17
+(defn mult [a b]
+  (if (zero? b)
+    0
+    (+ a (mult a (- b 1)))))
     
+(defn double [x]
+  (+ x x))
+(defn half [x]
+  (/ x 2))
+
+(defn fast-mult [a b]
+  (cond 
+    (zero? b) 0
+    (even? b) (double (fast-mult a (half b)))
+    :else (+ a (fast-mult a (dec b)))))
