@@ -173,3 +173,12 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
     (zero? b) 0
     (even? b) (double (fast-mult a (half b)))
     :else (+ a (fast-mult a (dec b)))))
+
+; ex 1.18
+(defn fast-mult-iter [a b]
+  (loop [buf (if (even? b) 0 a)
+         x   a
+         cnt b]
+    (if (< cnt 2)
+      (+ buf x)
+      (recur buf (double x) (half cnt)))))
