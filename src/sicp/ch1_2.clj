@@ -210,7 +210,7 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
      (> (square test-divisor) n) n
      (div? test-divisor n) test-divisor
      :else (find-divisor n (inc test-divisor))))
-(defn smallest-divisor [n]
+(defn smallest-divisor [n]  ; ex 1.21
   (find-divisor n 2))
 (defn prime? [n]
   (= n (smallest-divisor n)))
@@ -236,3 +236,15 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
 (defn fast-prime? [n times]
   (let [test  (fn [] (fermat-test n))]
     (every? true? (repeatedly times test))))
+
+; ex. 1.22
+(defn report-prime [elapsed-time]
+  (print " *** " elapsed-time " msecs"))
+(defn start-prime-test [n start-time]
+  (when (prime? n)
+    (report-prime (/ (- (. System (nanoTime)) start-time)
+                     1000000.0))))
+(defn timed-prime-test [n]
+  (println)
+  (print n)
+  (start-prime-test n (. System (nanoTime))))
