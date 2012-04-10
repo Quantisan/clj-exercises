@@ -203,12 +203,12 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
   (fib-iter 1 0 0 1 n))
 
 ; pg 98
-(defn divides? [a b]
+(defn div? [a b]
      (zero? (rem b a)))
 (defn find-divisor [n test-divisor]
    (cond 
      (> (square test-divisor) n) n
-     (divides? test-divisor n) test-divisor
+     (div? test-divisor n) test-divisor
      :else (find-divisor n (inc test-divisor))))
 (defn smallest-divisor [n]
   (find-divisor n 2))
