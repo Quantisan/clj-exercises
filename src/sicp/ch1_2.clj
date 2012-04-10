@@ -214,3 +214,25 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
   (find-divisor n 2))
 (defn prime? [n]
   (= n (smallest-divisor n)))
+
+; pg 100
+(defn expmod [base exp m]
+  (rem (int (Math/pow base exp)) m))
+(defn fermat-test [n]
+  (let [try-it  (fn [a]
+                  (= (expmod a n n) a))]
+    (-> n
+      (dec)
+      (rand)
+      (int)
+      (inc)
+      (try-it))))
+(defn fast-prime-ver?   ;; book's version 
+  [n times]
+  (cond 
+    (= times 0) true
+    (fermat-test n) (fast-prime? n (dec times))
+    :else false))
+(defn fast-prime? [n times]
+  (let [test  (fn [] (fermat-test n))]
+    (every? true? (repeatedly times test))))
