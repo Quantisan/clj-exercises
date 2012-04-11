@@ -231,7 +231,7 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
   [n times]
   (cond 
     (= times 0) true
-    (fermat-test n) (fast-prime? n (dec times))
+    (fermat-test n) (fast-prime-ver? n (dec times))
     :else false))
 (defn fast-prime? [n times]
   (let [test  (fn [] (fermat-test n))]
@@ -248,3 +248,5 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
   (println)
   (print n)
   (start-prime-test n (. System (nanoTime))))
+(defn scan-primes [n]
+  (map timed-prime-test (range n)))
