@@ -217,7 +217,7 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
 
 ; pg 100
 (defn expmod [base exp m]
-  (rem (int (Math/pow base exp)) m))
+  (rem (long (Math/pow base exp)) m))  ;; num overflow
 (defn fermat-test [n]
   (let [try-it  (fn [a]
                   (= (expmod a n n) a))]
@@ -250,3 +250,19 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
   (start-prime-test n (. System (nanoTime))))
 (defn scan-primes [n]
   (map timed-prime-test (range n)))
+
+; ex. 1.23
+(defn find-divisor2 [n test-divisor]
+  (let [next  (fn [x]
+                (if (= x 2)
+                  3
+                  (+ 2 x)))]
+    (cond 
+      (> (square test-divisor) n) n
+      (div? test-divisor n) test-divisor
+      :else (find-divisor2 n (next test-divisor)))))
+(defn smallest-divisor2 [n]  ; ex 1.21
+  (find-divisor2 n 2))
+
+; ex 1.27
+(map #(fast-prime? % 1000) [561 1105 1729 2465 2831 6601])
