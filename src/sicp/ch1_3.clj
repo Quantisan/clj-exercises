@@ -67,3 +67,20 @@
     1
     (* (term a)
        (product-rec term (next a) next b))))
+
+; ex 1.32
+(defn accumulate [combiner null-value term a next b]
+  {:pre [(fn? combiner) (integer? a) (integer? b)]}
+  (if (> a b)
+    null-value
+    (combiner (term a)
+              (accumulate combiner null-value term (next a) next b))))
+(def sum-acc (partial accumulate + 0))
+(def product-acc (partial accumulate * 1))
+
+(defn accumulate-iter [combiner null-value term a next b]
+  {:pre [(fn? combiner) (integer? a) (integer? b)]}
+  (loop [a  a, result null-value]
+    (if (> a b)
+      result
+      (recur (next a) (combiner (term a) result)))))
