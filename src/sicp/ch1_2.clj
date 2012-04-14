@@ -1,5 +1,4 @@
-(ns sicp.ch1-2
-  (:use clojure.test))
+(ns sicp.ch1-2)
 
 (defn factorial-down
   [n]
