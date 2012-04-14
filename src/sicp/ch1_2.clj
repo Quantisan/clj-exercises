@@ -1,4 +1,5 @@
-(ns sicp.ch1-2)
+(ns sicp.ch1-2
+  (:use clojure.test))
 
 (defn factorial-down
   [n]
@@ -217,7 +218,13 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
 
 ; pg 100
 (defn expmod [base exp m]
-  (rem (long (Math/pow base exp)) m))  ;; num overflow
+  (cond (= exp 0) 1
+        (even? exp)
+          (rem (square (expmod base (/ exp 2) m))
+               m)
+        :else 
+          (rem (* base (expmod base (dec exp) m))
+               m)))
 (defn fermat-test [n]
   (let [try-it  (fn [a]
                   (= (expmod a n n) a))]
