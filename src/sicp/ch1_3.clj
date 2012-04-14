@@ -1,4 +1,5 @@
-(ns sicp.ch1-3)
+(ns sicp.ch1-3
+  (:use [sicp.ch1-2 :only (prime? square div?)]))
 
 (defn sum [term a next b]
   (if (> a b)
@@ -84,3 +85,30 @@
     (if (> a b)
       result
       (recur (next a) (combiner (term a) result)))))
+
+; ex 1.33-a
+(defn filtered-accumulate [combiner null-value filter term a next b]
+  {:pre [(fn? combiner) (integer? a) (integer? b)]}
+  (loop [a  a, result null-value]
+    (if (> a b)
+      result
+      (recur (next a) (if (filter a)
+                        (combiner (term a) result)
+                        result)))))
+(def filtered-sum (partial filtered-accumulate + 0)) 
+(defn sum-sq-prime [a b]
+  (filtered-sum prime? square a inc b))
+
+; ex 1.33-b
+(defn gcd [a b]
+  (loop [a a, b b, test-div (min a b)]
+    (cond 
+      (and (div? test-div a) (div? test-div b))  test-div
+      :else (recur a b (dec test-div)))))
+
+
+(def filtered-prod (partial filtered-accumulate * 1))
+(defn prod-relative-primes [n]
+  (let [relative-prime?  (fn [x]
+                           (= 1 (gcd x n)))]
+    (filtered-prod relative-prime? identity 1 inc n)))
