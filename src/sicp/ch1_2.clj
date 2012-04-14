@@ -273,3 +273,27 @@ and f (n) = f (n - 1) + 2f (n - 2) + 3f (n - 3) if n >= 3"
 
 ; ex 1.27
 (map #(fast-prime? % 1000) [561 1105 1729 2465 2831 6601])
+
+; ex 1.28  ;; algo incorrect
+(defn sq-check [x m]
+  (when (and (not= x 1) (not= x (dec m)))
+    (= (rem (square x) m) 1)))
+
+(defn expmod2 [base exp m]
+  (cond (= exp 0) 1
+        (even? exp) (let [x  (square (expmod2 base (/ exp 2) m))]
+                      (if (sq-check x m)
+                        0
+                        (rem x m)))
+        :else 
+          (rem (* base (expmod2 base (dec exp) m))
+               m)))
+(defn mr-test [n]
+  (let [try-it  (fn [a]
+                  (= (expmod2 a (dec n) n) 1))]
+    (-> n
+      (dec)
+      (rand)
+      (int)
+      (inc)
+      (try-it))))
