@@ -40,3 +40,30 @@
     (if (> a b)
       result
       (recur (next a) (+ (term a) result)))))
+
+; ex 1.31
+(defn product [term a next b]
+  {:pre [(integer? a) (integer? b)]}
+  (loop [a  a, result 1]
+    (if (> a b)
+      result
+      (recur (next a) (* (term a) result)))))
+
+(defn factorial [n]
+  (product identity 1 inc n))
+
+(defn pi-term [k] 
+  (if (even? k) 
+    (/ (+ k 2) (+ k 1)) 
+    (/ (+ k 1) (+ k 2))))
+
+(defn pi-guess [n]
+  (float (* (product pi-term 1 inc n) 4)))
+
+; ex 1.31-b
+(defn product-rec [term a next b]
+  {:pre [(integer? a) (integer? b)]}
+  (if (> a b)
+    1
+    (* (term a)
+       (product-rec term (next a) next b))))
