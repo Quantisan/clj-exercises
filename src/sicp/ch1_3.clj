@@ -24,12 +24,19 @@
   {:pre [(even? n)]}
   (let [h  (/ (- b a) n)
         term (fn [k]
-               (let [c  (cond
-                          (zero? k) 1
-                          (= k n)   1
-                          (odd? k)  4
-                          (even? k) 2)]
-                 (* c
+               (let [coeff  (cond
+                              (zero? k) 1
+                              (= k n)   1
+                              (odd? k)  4
+                              (even? k) 2)]
+                 (* coeff
                     (f (+ a (* k h))))))]
     (* (/ h 3)
        (sum term 0 inc n))))
+
+; ex 1.30
+(defn sum-iter [term a next b]
+  (loop [a  a, result 0]
+    (if (> a b)
+      result
+      (recur (next a) (+ (term a) result)))))
