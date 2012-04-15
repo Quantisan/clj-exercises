@@ -34,6 +34,7 @@
 ; Finding fixed points
 (defn fixed-point [f first-guess]
   (letfn [(test [guess]
+                (print guess " ")
                 (let [next (f guess)]
                   (if (close-enough? guess next)
                     next
@@ -46,3 +47,7 @@
 ; ex 1.35
 (defn golden-ratio []
   (fixed-point #(+ 1 (/ %)) 1.0))
+
+; ex 1.36
+(defn x-x []
+  (fixed-point #(/ (Math/log 1000) (Math/log %)) 2.0))
