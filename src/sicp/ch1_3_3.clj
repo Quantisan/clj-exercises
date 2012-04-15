@@ -61,3 +61,8 @@
          (rec 1)))
 
 ; ex. 1.37-b
+(defn cont-frac-iter [n d k]
+  (loop [result 0, i k]
+    (if (zero? i)
+      result
+      (recur (/ (n i) (+ (d i) result)) (dec i)))))
