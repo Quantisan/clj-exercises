@@ -32,3 +32,13 @@
        (throw (IllegalArgumentException. "Values are not of opposite sign")))))
 
 ; Finding fixed points
+(defn fixed-point [f first-guess]
+  (letfn [(test [guess]
+                (let [next (f guess)]
+                  (if (close-enough? guess next)
+                    next
+                    (test next))))]
+    (test first-guess)))
+
+(defn sqrt [x]
+  (fixed-point (fn [y] (average y (/ x y))) 1.0))
