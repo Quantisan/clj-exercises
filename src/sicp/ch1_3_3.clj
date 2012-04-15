@@ -51,3 +51,13 @@
 ; ex 1.36
 (defn x-x []
   (fixed-point #(/ (Math/log 1000) (Math/log %)) 2.0))
+
+; ex 1.37
+(defn cont-frac [n d k]
+  (letfn [(rec [i]
+                (if (= i k)
+                  (/ (n i) (d i))
+                  (/ (n i) (+ (d i) (rec (inc i))))))]
+         (rec 1)))
+
+; ex. 1.37-b
