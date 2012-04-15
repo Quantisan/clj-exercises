@@ -42,3 +42,7 @@
 
 (defn sqrt [x]
   (fixed-point (fn [y] (average y (/ x y))) 1.0))
+
+; ex 1.35
+(defn golden-ratio []
+  (fixed-point #(+ 1 (/ %)) 1.0))
