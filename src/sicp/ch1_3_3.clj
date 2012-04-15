@@ -6,8 +6,8 @@
     (- n)
     n))
 
-(defn close-enough? [x y]
-  (< (abs (- x y)) 0.001))
+(defn close-enough? [x y & tolerance]
+  (< (abs (- x y)) (or tolerance 0.001)))
 (defn average [x y & more]
   (/ (apply + x y more) (+ (count more) 2)))
 
@@ -30,3 +30,5 @@
       (and (neg? b-value) (pos? a-value))  (search f b a)
       :else
        (throw (IllegalArgumentException. "Values are not of opposite sign")))))
+
+; Finding fixed points
