@@ -34,7 +34,6 @@
 ; Finding fixed points
 (defn fixed-point [f first-guess]
   (letfn [(test [guess]
-                (print guess " ")
                 (let [next (f guess)]
                   (if (close-enough? guess next)
                     next
