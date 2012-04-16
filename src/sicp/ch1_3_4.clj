@@ -10,3 +10,7 @@
 (defn sqrt [x]
   (fixed-point (average-damp (fn [y] (/ x y)))
                1.0))
+
+(defn cube-root [x]
+  (fixed-point (average-damp (fn [y] (/ x (square y))))
+               1.0))
