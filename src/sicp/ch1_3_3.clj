@@ -78,6 +78,13 @@
                    (+ 4 (* (dec (int (/ j 3))) 2))
                  :else 1)))]
     (double (+ 2 (cont-frac n d k)))))
-                 
-               
-               
+
+; ex 1.39
+(defn tan-cf [x k]
+  (let [n (fn [i]
+            (if (= i 1)
+              x
+              (- (Math/pow x 2))))
+        d (fn [i]
+            (inc (* 2 (dec i))))]
+    (cont-frac n d k)))
