@@ -66,3 +66,18 @@
     (if (zero? i)
       result
       (recur (/ (n i) (+ (d i) result)) (dec i)))))
+
+; ex 1.38
+(defn euler-expansion [k]
+  (let [n  (fn [_] 1)
+        d  (fn [i]   ;; [1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, ...]
+             (let [j  (- i 2)]
+               (cond
+                 (= i 2) 2
+                 (zero? (mod j 3))
+                   (+ 4 (* (dec (int (/ j 3))) 2))
+                 :else 1)))]
+    (double (+ 2 (cont-frac n d k)))))
+                 
+               
+               
