@@ -32,3 +32,23 @@
 
 (defn sqrt2 [x]
   (newtons-method (fn [y] (- (square y) x)) 1.0))
+
+(defn fixed-point-of-transform [g transform guess]
+  (fixed-point (transform g) guess))
+
+(defn sqrt3 [x]
+  (fixed-point-of-transform (fn [y] (/ x y))
+                            average-damp
+                            1.0))
+
+(defn sqrt4 [x]
+  (fixed-point-of-transform (fn [y] (- (square y) x))
+                            newton-transform
+                            1.0))
+
+; ex 1.40
+(defn cubic [a b c]
+  (fn [x]
+    (+ (cube x) (* a (square x)) (* b x) c)))
+(defn cubic-root [a b c]
+  (newtons-method (cubic a b c) 1))
