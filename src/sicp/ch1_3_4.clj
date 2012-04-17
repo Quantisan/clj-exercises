@@ -29,3 +29,6 @@
 
 (defn newtons-method [g guess]
   (fixed-point (newton-transform g) guess))
+
+(defn sqrt2 [x]
+  (newtons-method (fn [y] (- (square y) x)) 1.0))
