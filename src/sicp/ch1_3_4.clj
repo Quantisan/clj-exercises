@@ -52,3 +52,14 @@
     (+ (cube x) (* a (square x)) (* b x) c)))
 (defn cubic-root [a b c]
   (newtons-method (cubic a b c) 1))
+
+; ex 1.41
+(defn double [f]
+  (fn [x]
+    (f (f x))))
+(((double (double double)) inc) 5)  ;; 21
+
+; ex 1.42
+(defn compose [f g]
+  (fn [x]
+    (f (g x))))
