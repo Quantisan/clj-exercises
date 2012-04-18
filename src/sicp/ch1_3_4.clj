@@ -80,3 +80,9 @@
 
 (defn n-smooth [f n]
   (repeated (smooth f) n))
+
+; ex 1.45
+(defn n-root [x n]
+  (fixed-point ((repeated average-damp (- n 2))
+                 (fn [y] (/ x (Math/pow y (dec n)))))
+                 1.0))
