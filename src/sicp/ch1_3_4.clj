@@ -66,7 +66,17 @@
 
 ; ex 1.43
 (defn repeated [f n]
+  (let [g  (loop [g f, i n]
+             (if (= i 1)
+               g
+               (recur (compose g f) (dec i))))]
   (fn [x]
-    (if (= n 1)
-      (f x)
-      ((repeated (compose f f) (dec n)) x))))
+    (g x))))
+
+; ex 1.44
+(defn smooth [f]
+  (fn [x]
+    (average (f (+ x dx)) (f x) (f (- x dx)))))
+
+(defn n-smooth [f n]
+  (repeated (smooth f) n))
