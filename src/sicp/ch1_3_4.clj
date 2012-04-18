@@ -63,3 +63,10 @@
 (defn compose [f g]
   (fn [x]
     (f (g x))))
+
+; ex 1.43
+(defn repeated [f n]
+  (fn [x]
+    (if (= n 1)
+      (f x)
+      ((repeated (compose f f) (dec n)) x))))
