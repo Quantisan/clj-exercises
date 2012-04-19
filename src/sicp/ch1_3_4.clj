@@ -1,7 +1,7 @@
 (ns sicp.ch1-3-4
   (:use [sicp.ch1-3-3 :only (average fixed-point)]
         [sicp.ch1-2 :only (square)]
-        [sicp.ch1-1 :only (cube)]))
+        [sicp.ch1-1 :only (cube good-enough? improve-sq)]))
 
 (defn average-damp [f]
   (fn [x] (average x (f x))))
@@ -86,3 +86,16 @@
   (fixed-point ((repeated average-damp (- n 2))
                  (fn [y] (/ x (Math/pow y (dec n)))))
                  1.0))
+
+; ex 1.46
+(defn iterative-improve [good-enough? improve]
+  (fn [guess x]
+    (let [guess  (improve guess x)]
+      (if (good-enough? guess x)
+        guess
+        (iterative-improve good-enough? (compose improve improve))))))
+
+(def sqrt-good-enough? (good-enough? square))
+
+(defn sqrt5 [x]
+  ((iterative-improve sqrt-good-enough? improve-sq) 1.0 x))

@@ -60,7 +60,7 @@ returns the sum of the squares of the two larger numbers."
 ;;;;;;;;;;;;;;;;;;;;;;;;
 (defn cube [x] (* x x x))
 
-(defn- improve-sq
+(defn improve-sq
   [guess x]
 	(average guess (/ x guess)))
 
@@ -70,7 +70,7 @@ returns the sum of the squares of the two larger numbers."
      		(* 2 guess))
      3))
 
-(defn- good-enough?
+(defn good-enough?
   [f]
   (fn [guess x]
 		(< (abs (- (f guess) x)) 
