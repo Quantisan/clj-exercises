@@ -1,6 +1,23 @@
-(ns sicp.ch2-1-1)
+(ns sicp.ch2-1-1
+  (:use [sicp.ch1-1 :only (abs)]))
 
-(defn make-rat [n d] (cons n [d]))
+(defn gcd [a b]
+  (if (zero? b)
+    a
+    (abs (gcd b (mod a b)))))
+
+; ex 2.1
+(defn sign [n d]
+  (let [sign (neg? (* n d))]
+    (if sign
+      (- (abs n))
+      (abs n))))
+
+(defn make-rat [n d]
+  (let [g  (gcd n d)
+        n  (sign n d)]
+    (cons (/ n g) [(abs (/ d g))])))
+
 (defn numer [x] (first x))
 (defn denom [x] (last x))
 
@@ -23,3 +40,9 @@
             (* (denom x) (numer y))))
 
 (defn equal-rat? [x y]     (= (* (numer x) (denom y))        (* (numer y) (denom x))))
+
+(defn print-rat [x]
+  (println (numer x) "/" (denom x)))
+
+(def one-half (make-rat 1 2))
+(def one-third (make-rat 1 3))
