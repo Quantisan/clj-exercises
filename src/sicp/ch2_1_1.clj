@@ -46,3 +46,28 @@
 
 (def one-half (make-rat 1 2))
 (def one-third (make-rat 1 3))
+
+; ex. 2.2
+(defn make-point [x y]
+  [x y])
+(defn x-point [p]
+  (first p))
+(defn y-point [p]
+  (last p))
+(defn print-point [p]
+  (println p))
+
+(defn avg [& more]
+  (double (/ (apply + more) (count more))))
+
+(defn make-segment [start end]
+  [start end])
+(defn start-segment [sg]
+  (first sg))
+(defn end-segment [sg]
+  (last sg))
+(defn midpoint-segment [sg]
+  (let [s  (start-segment sg)
+        e  (end-segment sg)]
+    (make-point (avg (x-point s) (x-point e))
+                (avg (y-point s) (y-point e)))))
