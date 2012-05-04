@@ -93,4 +93,4 @@
 (defn perimeter-rect [r]
   (apply + (height-width-rect r)))
 (defn area-rect [r]
-  (apply * (height-width-rect r)))           
+  (apply * (height-width-rect r)))
