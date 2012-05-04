@@ -71,3 +71,26 @@
         e  (end-segment sg)]
     (make-point (avg (x-point s) (x-point e))
                 (avg (y-point s) (y-point e)))))
+
+; ex 2.3
+(defn make-rect [up-left low-right]
+  [up-left low-right])
+(defn up-left-point [r]
+  (first r))
+(defn low-right-point [r]
+  (last r))
+(defn top-rect [r]
+  (y-point (up-left-point r)))
+(defn bottom-rect [r]
+  (y-point (low-right-point r)))
+(defn left-rect [r]
+  (x-point (up-left-point r)))
+(defn right-rect [r]
+  (x-point (low-right-point r)))
+(defn height-width-rect [r]
+  [(abs (- (right-rect r) (left-rect r)))
+   (abs (- (top-rect r) (bottom-rect r)))])
+(defn perimeter-rect [r]
+  (apply + (height-width-rect r)))
+(defn area-rect [r]
+  (apply * (height-width-rect r)))           
