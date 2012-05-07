@@ -40,5 +40,5 @@
 (defn add [a b]
   (fn [f]
     (fn [x]
-      (f ((b (a f)) x)))))
+      (f (((comp a b) f) x)))))
 (((add one two) inc) 1)
