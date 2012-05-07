@@ -23,3 +23,22 @@
   (pow-cnt z 2))
 (defn cdr [z]
   (pow-cnt z 3))
+
+; ex 2.6
+(def zero (fn [f] (fn [x] x)))
+
+(defn add-1 [n]
+  (fn [f]
+    (fn [x] (f ((n f) x)))))
+
+((zero inc) 1)
+(def one (fn [f] (fn [x] (f x))))
+(def two (fn [f] (fn [x] (f (f x)))))
+((one inc) 1)
+((two inc) 1)
+
+(defn add [a b]
+  (fn [f]
+    (fn [x]
+      (f ((b (a f)) x)))))
+(((add one two) inc) 1)
