@@ -11,3 +11,9 @@
     coll
     (last-pair (rest coll))))
 (= (last-pair (list 23 72 149 34)) '(34))
+
+; ex 2.18
+(defn reverse [coll]
+  (when (seq coll)
+    (cons (last coll) (reverse (drop-last coll)))))
+(= (reverse (list 1 4 9 16 25)) (list 25 16 9 4 1))
