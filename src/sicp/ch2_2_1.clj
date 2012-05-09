@@ -1,4 +1,5 @@
-(ns sicp.ch2-2-1)
+(ns sicp.ch2-2-1
+  (:use [sicp.ch1-2 :only (square)]))
 
 (defn append [list1 list2]
   (if (empty? list1)
@@ -43,3 +44,9 @@
             (filter odd? coll))))
 (= (same-parity 1 2 3 4 5 6 7) '(1 3 5 7))
 (= (same-parity 2 3 4 5 6 7) '(2 4 6))
+
+; ex 2.21
+(defn square-list [items]
+  (if (empty? items)
+    nil
+    (cons (square (first items)) (square-list (rest items)))))(defn square-list [items] (map square items))
