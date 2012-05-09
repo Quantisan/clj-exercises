@@ -50,3 +50,16 @@
   (if (empty? items)
     nil
     (cons (square (first items)) (square-list (rest items)))))(defn square-list [items] (map square items))
+
+; ex 2.22
+(defn square-list [items]
+  (loop [things items, answer '()]
+    (if (empty? things)
+      answer
+      (recur (rest things) (cons (square (first things)) answer)))))
+
+(defn square-list [items]
+  (loop [things items, answer '()]
+    (if (empty? things)
+      answer
+      (recur (rest things) (conj answer (square (first things)))))))
