@@ -63,3 +63,11 @@
     (if (empty? things)
       answer
       (recur (rest things) (conj answer (square (first things)))))))
+
+; ex 2.23
+(defn for-each [f coll]
+  (when (seq coll)
+    (f (first coll))
+    (for-each f (rest coll))))
+    
+(for-each (fn [x] (println x)) (list 57 321 88))
