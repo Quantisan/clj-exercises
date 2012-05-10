@@ -9,3 +9,12 @@
 
 ; ex 2.25
 (first (rest (first (rest (rest '(1 3 (5 7) 9))))))(first (first '((7))))(first (rest (first (rest (first (rest (first (rest (first (rest (first (rest '(1 (2 (3 (4 (5 (6 7))))))))))))))))))
+
+; ex 2.27
+(defn deep-reverse [coll]
+  (when (seq coll)
+    (if (coll? (last coll))
+      (cons (deep-reverse (last coll)) (deep-reverse (drop-last coll)))
+      (cons (last coll) (reverse (drop-last coll))))))
+(let [x (list (list 1 2) (list 3 4))]
+  (= (deep-reverse x) '((4 3) (2 1))))
