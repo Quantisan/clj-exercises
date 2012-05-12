@@ -30,5 +30,5 @@
   (when (seq coll)
     (let [[x & coll] coll]
       (if (coll? x)
-        (into (into [] (fringe x)) (fringe coll)) ;; or use 'append'
+        (into (into [] (fringe x)) (fringe coll)) ;; or use 'append' to keep data type
         (cons x (fringe coll))))))
