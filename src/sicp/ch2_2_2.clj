@@ -1,5 +1,5 @@
 (ns sicp.ch2-2-2
-  (:use [sicp.ch2-2-1 :only (reverse)]))
+  (:use [sicp.ch2-2-1 :only (reverse append)]))
 
 (defn count-leaves [x]
   (cond
@@ -27,9 +27,8 @@
 
 ; ex 2.28
 (defn fringe [coll]
-  (println coll)
-  (cond
-    (empty? coll) nil
-    (not (coll? coll)) coll
-    (not (coll? (first coll))) (cons (first coll) (fringe (rest coll)))
-    :else (cons (fringe (first coll) (fringe (rest coll))))))
+  (when (seq coll)
+    (let [[x & coll] coll]
+      (if (coll? x)
+        (into (into [] (fringe x)) (fringe coll)) ;; or use 'append'
+        (cons x (fringe coll))))))
