@@ -1,4 +1,5 @@
-(ns sicp.ch2-2-2)
+(ns sicp.ch2-2-2
+  (:use [sicp.ch2-2-1 :only (reverse)]))
 
 (defn count-leaves [x]
   (cond
@@ -16,5 +17,19 @@
     (if (coll? (last coll))
       (cons (deep-reverse (last coll)) (deep-reverse (drop-last coll)))
       (cons (last coll) (reverse (drop-last coll))))))
-(let [x (list (list 1 2) (list 3 4))]
-  (= (deep-reverse x) '((4 3) (2 1))))
+(defn deep-reverse [coll]
+  (if (coll? coll)
+    (reverse (map deep-reverse coll))
+    coll))
+(def x (list (list 1 2) (list 3 4)))
+
+(= (deep-reverse x) '((4 3) (2 1)))
+
+; ex 2.28
+(defn fringe [coll]
+  (println coll)
+  (cond
+    (empty? coll) nil
+    (not (coll? coll)) coll
+    (not (coll? (first coll))) (cons (first coll) (fringe (rest coll)))
+    :else (cons (fringe (first coll) (fringe (rest coll))))))
