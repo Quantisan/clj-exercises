@@ -79,4 +79,19 @@
          (if (coll? right-struct)
            (balanced? right-struct)
            true))))
+
+
+(defn scale-tree [tree factor]
+  (cond 
+    (and (coll? tree) (empty? tree)) nil
+    (not (coll? tree)) (* tree factor)
+    :else (cons (scale-tree (first tree) factor)
+                (scale-tree (rest tree) factor))))
+
+(defn scale-tree [tree factor]
+  (map (fn [sub-tree]
+         (if (coll? sub-tree)
+           (scale-tree sub-tree factor)
+           (* sub-tree factor)))
+       tree))
                  
