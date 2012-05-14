@@ -32,3 +32,51 @@
       (if (coll? x)
         (into (into [] (fringe x)) (fringe coll)) ;; or use 'append' to keep data type
         (cons x (fringe coll))))))
+
+; ex 2.29
+(defn make-mobile [left right]     (list left right))
+(defn make-branch [length structure]     (list length structure))
+(defn left-branch [mob]
+  (first mob))
+(defn right-branch [mob]
+  (last mob))
+(defn branch-length [br]
+  (first br))
+(defn branch-structure [br]
+  (last br))
+
+(def a (make-branch 3 10))
+(def b (make-branch 2 4))
+(def c (make-branch 1 7))
+(def mob (make-mobile a (make-branch 6 (make-mobile b c))))
+
+(defn total-weight [mob]
+  (let [left  (left-branch mob)
+        right (right-branch mob)
+        left-struct (branch-structure left)
+        right-struct (branch-structure right)]
+  (+ (if (coll? left-struct)
+       (total-weight left-struct)
+       left-struct)
+     (if (coll? right-struct)
+       (total-weight right-struct)
+       right-struct))))
+
+(defn branch-torque [br]
+  (let [stc  (branch-structure br)]
+    (* (branch-length br) (if (coll? stc)
+                            (total-weight stc)
+                            stc))))
+(defn balanced? [mob]
+  (let [left  (left-branch mob)
+        right (right-branch mob)        
+        left-struct (branch-structure left)
+        right-struct (branch-structure right)]
+    (and (= (branch-torque left) (branch-torque right))
+         (if (coll? left-struct)
+           (balanced? left-struct)
+           true)
+         (if (coll? right-struct)
+           (balanced? right-struct)
+           true))))
+                 
