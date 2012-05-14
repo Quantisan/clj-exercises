@@ -1,5 +1,6 @@
 (ns sicp.ch2-2-2
-  (:use [sicp.ch2-2-1 :only (reverse append)]))
+  (:use [sicp.ch2-2-1 :only (reverse append)]
+        [sicp.ch1-1 :only (square)]))
 
 (defn count-leaves [x]
   (cond
@@ -94,4 +95,18 @@
            (scale-tree sub-tree factor)
            (* sub-tree factor)))
        tree))
+
+; ex 2.30
+(defn square-tree [tree]
+  (cond 
+    (and (coll? tree) (empty? tree)) nil
+    (not (coll? tree)) (square tree)
+    :else (cons (square-tree (first tree))
+                (square-tree (rest tree)))))
                  
+(defn square-tree [tree]
+  (map (fn [sub-tree]
+         (if (coll? sub-tree)
+           (square-tree sub-tree)
+           (square sub-tree)))
+       tree))
