@@ -110,3 +110,11 @@
            (square-tree sub-tree)
            (square sub-tree)))
        tree))
+
+; ex 2.31
+(defn tree-map [f tree]
+  (map (fn [sub-tree]
+         (if (coll? sub-tree)
+           (tree-map f sub-tree)
+           (f sub-tree)))
+       tree))
