@@ -1,9 +1,17 @@
 # clj-exercises
 
-collection of exercises done in clojure
+Collection of exercises done in clojure. Includes those from:
+
+- 4clojure.com
+- Joy of Clojure
+- LabREPL
+- Little Schemer
+- Reasoned Schemer
+- Project Euler
+- SICP
 
 ## License
 
-Copyright (C) 2011 Paul Lam
+Copyright (C) 2013 Paul Lam
 
 Distributed under the Eclipse Public License, the same as Clojure.

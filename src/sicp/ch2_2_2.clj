@@ -118,3 +118,12 @@
            (tree-map f sub-tree)
            (f sub-tree)))
        tree))
+
+; ex 2.32   
+(defn subsets [s]
+  (println s)
+  (if (empty? s)
+    '()
+    (let [r  (subsets (rest s))]
+      (append r (map (fn [x] (cons (first s) x)) r)))))
+
